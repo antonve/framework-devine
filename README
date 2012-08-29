@@ -1,0 +1,5 @@
+The framework built for my assignments Dynamic Web Development. 
+
+As I'm a symfony2 user, and we weren't allowed to use frameworks (yet), I created a small framework myself with the structure of symfony2 in mind. 
+
+You can use it if you want, but I won't give support or maintain this. I'm not responsible for anything you do with this code as well.

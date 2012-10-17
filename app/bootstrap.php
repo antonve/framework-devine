@@ -21,6 +21,9 @@ session_start();
 // load general config file
 $config = include('config/config.php');
 
+// load services
+$services = include('config/services.php');
+
 // configure smarty templating engine
 include('config/smarty.php');
 
@@ -39,7 +42,7 @@ try {
     
     // execute the controller and receive the response
     $controllerResolver = new ControllerResolver($route, $request, $smarty);
-    $response = $controllerResolver->resolve($smarty);
+    $response = $controllerResolver->resolve($services);
     
     // configure templating
     $response->setLayout($project_dir . 'app/templates/layout.tpl');

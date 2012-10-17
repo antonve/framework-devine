@@ -7,26 +7,26 @@ namespace Devine\Framework;
 
 use Devine\Framework\Request;
 
-class BaseController
+class BaseController extends Injectable
 {
     /**
-     * @var Request  
+     * @var Request
      */
     private $request;
-    
+
     /**
-     * @var array  
+     * @var array
      */
     private $parameters;
-    
+
     /**
      * @var Response  
      */
     private $response;
-    
+
     /**
      * Initializes a controller
-     * @param Request $request  
+     * @param Request $request
      * @param Array $parameters
      */
     public function __construct(Request $request, Array $parameters, Response $response)
@@ -37,33 +37,33 @@ class BaseController
     }
 
     /**
-     * @return Request  
+     * @return Request
      */
     protected function getRequest()
     {
         return $this->request;
     }
-    
+
     /**
      * Add a variable that should be passed on to the template
      * @param type $key
      * @param type $value  
      */
-    protected function add($key, $value) 
+    protected function add($key, $value)
     {
         $this->parameters[$key] = $value;
     }
-    
+
     /**
      * @param string $parameter
      * @param mixed $default
-     * @return mixed  
+     * @return mixed
      */
     protected function get($parameter, $default = null)
     {
         return array_key_exists($parameter, $this->parameters) ? $this->parameters[$parameter] : $default;
     }
-    
+
     /**
      * Forwards an error 404 page not found
      * @throws PageNotFoundException  
@@ -72,7 +72,7 @@ class BaseController
     {
         throw new PageNotFoundException();
     }
-    
+
     /**
      * Redirect page to the given url
      * @param string $url  
@@ -83,7 +83,7 @@ class BaseController
         header ("Location: " . ((false !== $prefix) ? $prefix : $this->request->getRoot()) . $url);
         exit();
     }
-    
+
     /**
      * Proxy method to set the mode (json or html)
      * @param type $mode  
@@ -128,7 +128,7 @@ class BaseController
     {
         return $this->response->getSmarty();
     }
-    
+
     public function getParameters()
     {
         return $this->parameters;

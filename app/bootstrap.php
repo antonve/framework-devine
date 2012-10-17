@@ -21,8 +21,7 @@ session_start();
 // load general config file
 $config = include('config/config.php');
 
-// load services
-$services = include('config/services.php');
+$modules = include ('config/modules.php');
 
 // configure smarty templating engine
 include('config/smarty.php');
@@ -49,9 +48,6 @@ try {
     $response->setRoot($request->getRoot());
     $response->setRootDir(dirname($request->getRoot()));
     $response->setDevelopmentMode($config['dev']);
-    
-    // include module configuration
-    include ('config/modules.php');
 }
 
 // handle error 404's

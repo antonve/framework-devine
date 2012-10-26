@@ -45,6 +45,11 @@ class BundleLoader
     private $smarty;
 
     /**
+     * @var array
+     */
+    private $initPaths = array();
+
+    /**
      * @param array $bundles
      * @param BundleClassLoader $bundleClassLoader
      */
@@ -103,6 +108,7 @@ class BundleLoader
 
     /**
      * Get all services
+     * @return array
      */
     public function getServices()
     {
@@ -113,6 +119,23 @@ class BundleLoader
         }
 
         return $this->services;
+    }
+
+    /**
+     * Get all init paths
+     * @return array
+     */
+    public function getInitPaths()
+    {
+        if (empty($this->initPaths)) {
+            foreach ($this->loaded as $bundle) {
+                if ($bundle->hasInit()) {
+                    $this->initPaths[] = $bundle->getPath() . '/config/init.php';
+                }
+            }
+        }
+
+        return $this->initPaths;
     }
 
 }

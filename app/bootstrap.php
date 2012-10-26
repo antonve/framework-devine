@@ -57,6 +57,10 @@ try {
     $response->setRoot($request->getRoot());
     $response->setRootDir(dirname($request->getRoot()));
     $response->setDevelopmentMode($config['dev']);
+
+    foreach($bundleLoader->getInitPaths() as $path) {
+        include ($path);
+    }
 }
 
 // handle error 404's
@@ -77,7 +81,6 @@ catch (PageNotFoundException $e) {
     $response->setRoot($request->getRoot());
     $response->setRootDir(dirname($request->getRoot()));
     $response->setDevelopmentMode($config['dev']);
-
 }
 
 // handle all other errors

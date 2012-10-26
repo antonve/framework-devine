@@ -5,6 +5,7 @@
 
 $modules = array(
     'Example/ExampleBundle',
+    'Devine/User'
 );
 
 return $modules;

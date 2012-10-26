@@ -4,10 +4,10 @@
 // By Anton Van Eechaute
 
 return array(
-    'namespace' => 'Example',
-    'name'      => 'ExampleBundle',
+    'namespace' => 'Devine',
+    'name'      => 'User',
     'routes'    => true,
-    'init'      => false,
+    'init'      => true,
     'smarty'    => true,
     'services'  => array(
          array (

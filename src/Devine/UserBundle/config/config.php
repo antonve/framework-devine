@@ -5,15 +5,15 @@
 
 return array(
     'namespace' => 'Devine',
-    'name'      => 'User',
+    'name'      => 'UserBundle',
     'routes'    => true,
     'init'      => true,
     'smarty'    => true,
     'services'  => array(
-         array (
+         /*array (
         'name' => 'ExampleService',
         'class' => '\Example\ExampleBundle\Services\ExampleService',
         'config' => array('ExampleParam' => 'ExampleValue'),
-        ),
+        ),*/
     ),
 );

@@ -3,11 +3,11 @@
 // UserController.php - General controller
 // By Anton Van Eechaute
 
-namespace Devine\User\Controller;
+namespace Devine\UserBundle\Controller;
 
-use Devine\User\Repository\UsersRepository;
+use Devine\UserBundle\Repository\UsersRepository;
 use Devine\Framework\BaseController;
-use Devine\User\Model\User;
+use Devine\UserBundle\Model\User;
 use Devine\Framework\Validation;
 
 class UserController extends BaseController

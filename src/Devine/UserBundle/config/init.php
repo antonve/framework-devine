@@ -11,7 +11,7 @@ if (null === $request->get('user') && array_key_exists('remember_me', $_COOKIE))
     $key = $_COOKIE['remember_me'];
     
     if (64 === strlen($key)) {
-        $rep = new Devine\User\Repository\UsersRepository;
+        $rep = new Devine\UserBundle\Repository\UsersRepository;
         $user = $rep->getUserByRememberMe($key);
         if (false !== $user) {
             $request->set('user', $user);

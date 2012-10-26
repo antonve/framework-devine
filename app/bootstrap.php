@@ -9,10 +9,15 @@ use Devine\Framework\UrlMatcher;
 use Devine\Framework\ControllerResolver;
 use Devine\Framework\PageNotFoundException;
 use Devine\Framework\SingletonPDO;
+use Devine\Framework\BundleLoader;
+use Devine\Framework\BundleClassLoader;
+
+// load helpers
+require_once ($project_dir . 'src/Devine/Framework/helpers.php');
 
 // configure autoloader
 include($project_dir . 'vendors/SplClassLoader.php');
-$classLoader = new SplClassLoader('Devine', $project_dir . '/src/');
+$classLoader = new SplClassLoader('Devine', $project_dir . 'src/');
 $classLoader->register();
 
 // start session
@@ -21,19 +26,23 @@ session_start();
 // load general config file
 $config = include('config/config.php');
 
-$modules = include ('config/modules.php');
-
 // configure smarty templating engine
 include('config/smarty.php');
 
 // try to build the page
 try {
+
+    // set up bundle autoloading
+    $bundleClassLoader = new BundleClassLoader($classLoader, $project_dir . 'src/');
+
+    // load modules
+    $bundleLoader = new BundleLoader(include('config/bundles.php'), $bundleClassLoader);
+    $bundleLoader->load($project_dir . 'src/');
+
     // build Request object
     $request = new Request();
-
     // load routes & look for a match
-    $routes = include('config/routes.php');
-    $urlMatcher = new UrlMatcher($routes, $request);
+    $urlMatcher = new UrlMatcher($bundleLoader->getRoutes(), $request);
     $route = $urlMatcher->match();
     
     // configure database
@@ -41,7 +50,7 @@ try {
     
     // execute the controller and receive the response
     $controllerResolver = new ControllerResolver($route, $request, $smarty);
-    $response = $controllerResolver->resolve($services);
+    $response = $controllerResolver->resolve($bundleLoader->getServices());
     
     // configure templating
     $response->setLayout($project_dir . 'app/templates/layout.tpl');
@@ -68,9 +77,7 @@ catch (PageNotFoundException $e) {
     $response->setRoot($request->getRoot());
     $response->setRootDir(dirname($request->getRoot()));
     $response->setDevelopmentMode($config['dev']);
-    
-    // include module configuration
-    include ('config/modules.php');
+
 }
 
 // handle all other errors

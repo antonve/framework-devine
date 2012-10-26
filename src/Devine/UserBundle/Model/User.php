@@ -3,7 +3,7 @@
 // Product.php - 
 // By Anton Van Eechaute
 
-namespace Devine\User\Model;
+namespace Devine\UserBundle\Model;
 
 class User 
 {

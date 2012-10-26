@@ -3,10 +3,10 @@
 // UsersRepository.php - 
 // By Anton Van Eechaute
 
-namespace Devine\User\Repository;
+namespace Devine\UserBundle\Repository;
 
 use Devine\Framework\SingletonPDO;
-use Devine\User\Model\User;
+use Devine\UserBundle\Model\User;
 
 class UsersRepository
 {
@@ -26,7 +26,7 @@ class UsersRepository
     /**
      * Saves the user to the database, upgrade if not set
      * @param User $user
-     * @return \Devine\User\Model\User ¬†
+     * @return \Devine\UserBundle\Model\User ¬†
      */
     public function saveUser(User $user)
     {

@@ -74,7 +74,10 @@ class BundleLoader
                 );
                 $loadedBundle->load();
                 $this->bundleClassLoader->register($loadedBundle->getNamespace());
-                $this->smarty->addTemplateDir($path . $bundle . '/templates/');
+
+                if ($loadedBundle->hasSmarty()) {
+                    $this->smarty->addTemplateDir($path . $bundle . '/templates/');
+                }
 
                 $this->loaded[] = $loadedBundle;
             } else {

@@ -6,7 +6,7 @@
 namespace Devine\Framework;
 
 /**
- *
+ * Represents a bundle
  */
 class Bundle
 {
@@ -14,14 +14,12 @@ class Bundle
      * @var array
      */
     private $config   = array();
+
     /**
      * @var RouteCollection
      */
     private $routes;
-    /**
-     * @var array
-     */
-    private $smarty   = array();
+
     /**
      * @var array
      */
@@ -43,9 +41,6 @@ class Bundle
     {
         if ($this->config['routes']) {
             $this->routes = include ($this->config['path'] . '/config/routes.php');
-        }
-        if ($this->config['smarty']) {
-            $this->routes = include ($this->config['path']);
         }
 
         return $this;
@@ -80,7 +75,7 @@ class Bundle
     /**
      * @return bool
      */
-    public function getInit()
+    public function hasInit()
     {
         return $this->config['init'];
     }
@@ -99,6 +94,14 @@ class Bundle
     public function getPath()
     {
         return $this->config['path'];
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasSmarty()
+    {
+        return $this->config['smarty'];
     }
 
     /**

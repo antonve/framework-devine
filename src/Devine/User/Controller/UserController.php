@@ -64,7 +64,7 @@ class UserController extends BaseController
         // process login
         if ($request->isPOST()) {
             $rep = new UsersRepository();
-            $user = $rep->checkLogin($request->getPOST('username'), $request->getPOST('password'));
+            $user = $rep->checkLogin($request->getPOST('email'), $request->getPOST('password'));
             
             // proceed if user is found otherwise show error
             if (false !== $user) {
@@ -79,7 +79,7 @@ class UserController extends BaseController
                 $request->set('loggedInEvent', true);
                 $this->redirect('/');
             } else {
-                $this->add('error_login', 'Gebruikersnaam of wachtwoord is onjuist.');
+                $this->add('error_login', 'Email of wachtwoord is onjuist.');
             }
         } 
         

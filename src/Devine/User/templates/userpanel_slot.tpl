@@ -3,8 +3,8 @@ Welkom, {{$user->getUsername()|escape}}. <span class="userpanel_links"><a href="
 {{else}}
 <form action="{{$root}}/user/login" method="post" id="login" >
     <fieldset>
-        <input type="text" value="Gebruikersnaam" name="username" />
-        <input value="Paswoord" type="password" name="password" />
+        <input type="text" placeholder="email" name="email" />
+        <input placeholder="Paswoord" type="password" name="password" />
         <div class="remember_me"><input type="checkbox" id="remember_me" name="remember_me" /> <label for="remember_me">Onthouden?</label></div>
         <input type="submit" value="Log in"/>
         <div class="clearfix"></div>

@@ -5,8 +5,8 @@
 
 $db = array();
 $db['host'] = '127.0.0.1';
-$db['database'] = '';
-$db['username'] = '';
+$db['database'] = 'dev_frm';
+$db['username'] = 'root';
 $db['password'] = '';
 
 return $db;

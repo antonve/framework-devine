@@ -10,6 +10,4 @@ $smarty = new Smarty();
 $smarty->setTemplateDir($project_dir . 'app/templates');
 $smarty->setCompileDir($project_dir . 'app/cache/smarty');
 
-// add module specific template directories
 $smarty->addTemplateDir($project_dir . 'src/Devine/Framework/templates');
-//$smarty->addTemplateDir($project_dir . 'src/Devine/User/templates');

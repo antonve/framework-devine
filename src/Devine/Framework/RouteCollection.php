@@ -61,4 +61,13 @@ class RouteCollection
         
         return false;
     }
+
+    /**
+     * Check if the collection is empty
+     * @return bool
+     */
+    public function isEmpty()
+    {
+        return empty($this->routes);
+    }
 }

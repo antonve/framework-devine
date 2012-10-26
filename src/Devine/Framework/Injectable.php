@@ -11,12 +11,16 @@ class Injectable
 
     public function sget($name)
     {
-        return array_key_exists($name, $this->services) ? $this->services[$name] : null;
+        if (array_key_exists($name, $this->services)) {
+            return $this->services[$name];
+        }
+
+        throw new \Exception('Service \'' . $name . '\' not loaded.');
     }
 
     public function register($services)
     {
-        foreach ($services as $service) {
+        foreach ($services->getCollection() as $service) {
             if (!$this->isValid($service)) {
                 throw new \Exception('Invalid service');
             }

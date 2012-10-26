@@ -2,7 +2,7 @@
     <h1>Profiel</h1>
     <form action="{{$root}}/user/profile" method="post" id="profile_form">
         <fieldset>
-            <legend>Registreer</legend>
+            <legend>Required</legend>
             <label for="username_profile">Gebruikersnaam</label><br />
             <input type="text" name="profile[username]" id="username_profile" class="required {{if isset($error_username)}}error{{/if}}" value="{{$profile_username}}" /><br />
             {{if isset($error_username)}}<div class="error">{{$error_username}}</div>{{/if}}

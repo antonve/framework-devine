@@ -1,5 +1,3 @@
-The framework built for my assignments Dynamic Web Development. 
+I'm a student [Devine](http://www.devine.be), and to save myself some time in the long run I've developped a small framework to use in my assignments. You'll notice there are a lot of concepts that I've taken from the excellent framework Symfony 2. The only reason I started this is because we're not allowed to use frameworks (yet).
 
-As I'm a symfony2 user, and we weren't allowed to use frameworks (yet), I created a small framework myself with the structure of symfony2 in mind. 
-
-You can use it if you want, but I won't give support or maintain this. I'm not responsible for anything you do with this code as well.
+You can use it if you want, but I won't give support or maintain this for very long. I'm not responsible for anything you do with this code as well.

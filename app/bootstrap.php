@@ -36,7 +36,7 @@ try {
     $bundleClassLoader = new BundleClassLoader($classLoader, $project_dir . 'src/');
 
     // load modules
-    $bundleLoader = new BundleLoader(include('config/bundles.php'), $bundleClassLoader);
+    $bundleLoader = new BundleLoader(include('config/bundles.php'), $bundleClassLoader, $smarty);
     $bundleLoader->load($project_dir . 'src/');
 
     // build Request object
@@ -47,7 +47,7 @@ try {
     
     // configure database
     SingletonPDO::setConfig(include('config/database.php'));
-    
+
     // execute the controller and receive the response
     $controllerResolver = new ControllerResolver($route, $request, $smarty);
     $response = $controllerResolver->resolve($bundleLoader->getServices());
@@ -102,9 +102,6 @@ catch (Exception $e) {
     $response->setRoot($request->getRoot());
     $response->setRootDir(dirname($request->getRoot()));
     $response->setDevelopmentMode($config['dev']);
-    
-    // include module configuration
-    include ('config/modules.php');
 }
     
 // send the response

@@ -7,16 +7,20 @@ namespace Devine\Framework;
 
 class Module
 {
-    private $services = array();
-    private $config = array();
+    private $config;
+    private $routes;
+    private $smarty;
+    private $services;
 
-    public function __construct($config)
+
+    public function __construct(array $config)
     {
         $this->config = $config;
     }
 
     public function load()
     {
+        return $this;
     }
 
     public function isValid($module)

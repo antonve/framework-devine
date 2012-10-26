@@ -4,7 +4,7 @@
 // By Anton Van Eechaute
 
 $modules = array(
-    'Devine/User',
+    'Example/ExampleBundle',
 );
 
 return $modules;

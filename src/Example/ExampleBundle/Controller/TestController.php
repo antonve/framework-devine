@@ -11,8 +11,10 @@ class TestController extends BaseController
 {
     public function indexAction()
     {
-        $as = $this->sget('airport');
+        $as = $this->sget('ExampleService');
 
-        $this->setTemplate('index');
+        echo $as->test();
+
+        $this->setTemplate('example.index');
     }
 }

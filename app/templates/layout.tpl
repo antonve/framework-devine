@@ -11,6 +11,9 @@
 </head>
 
 <body>
+    <div id="userpanel">
+    {{$userpanel}}
+    </div>
     <div id="container">
         {{$content}}
     </div>

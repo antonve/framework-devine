@@ -11,9 +11,9 @@ class TestController extends BaseController
 {
     public function indexAction()
     {
-        $as = $this->sget('ExampleService');
+        $service = $this->sget('ExampleService');
 
-        echo $as->test();
+        $this->add('param', $service->test());
 
         $this->setTemplate('example.index');
     }

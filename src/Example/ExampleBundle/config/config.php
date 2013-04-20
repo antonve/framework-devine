@@ -13,7 +13,7 @@ return array(
          array (
         'name' => 'ExampleService',
         'class' => '\Example\ExampleBundle\Services\ExampleService',
-        'config' => array('ExampleParam' => 'ExampleValue'),
+        'config' => array('ExampleParam' => 'Hello world!'),
         ),
     ),
 );

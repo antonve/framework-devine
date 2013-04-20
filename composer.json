@@ -4,5 +4,11 @@
     "minimum-stability": "alpha",
     "require": {
         "twig/twig": "1.*"
+    },
+    "autoload": {
+    	"psr-0": {
+    		"Devine": "src/",
+    		"Example": "src/"
+    	}
     }
 }

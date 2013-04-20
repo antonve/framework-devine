@@ -10,15 +10,12 @@ use Devine\Framework\ControllerResolver;
 use Devine\Framework\PageNotFoundException;
 use Devine\Framework\SingletonPDO;
 use Devine\Framework\BundleLoader;
-use Devine\Framework\BundleClassLoader;
 
 // load helpers
 require_once ($project_dir . 'src/Devine/Framework/helpers.php');
 
 // configure autoloader
-include($project_dir . 'vendors/SplClassLoader.php');
-$classLoader = new SplClassLoader('Devine', $project_dir . 'src/');
-$classLoader->register();
+require_once $project_dir . 'vendor/autoload.php';
 
 // start session
 session_start();
@@ -32,11 +29,8 @@ include('config/smarty.php');
 // try to build the page
 try {
 
-    // set up bundle autoloading
-    $bundleClassLoader = new BundleClassLoader($classLoader, $project_dir . 'src/');
-
     // load modules
-    $bundleLoader = new BundleLoader(include('config/bundles.php'), $bundleClassLoader, $smarty);
+    $bundleLoader = new BundleLoader(include('config/bundles.php'), $smarty);
     $bundleLoader->load($project_dir . 'src/');
 
     // build Request object

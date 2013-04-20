@@ -35,11 +35,6 @@ class BundleLoader
     private $services;
 
     /**
-     * @var BundleClassLoader
-     */
-    private $bundleClassLoader;
-
-    /**
      * @var \Smarty
      */
     private $smarty;
@@ -53,11 +48,10 @@ class BundleLoader
      * @param array $bundles
      * @param BundleClassLoader $bundleClassLoader
      */
-    function __construct($bundles, BundleClassLoader $bundleClassLoader, \Smarty $smarty)
+    function __construct($bundles, \Smarty $smarty)
     {
         $this->bundles = $bundles;
         $this->routes = new RouteCollection();
-        $this->bundleClassLoader = $bundleClassLoader;
         $this->services = new Collection();
         $this->smarty = $smarty;
     }
@@ -78,7 +72,6 @@ class BundleLoader
                     )
                 );
                 $loadedBundle->load();
-                $this->bundleClassLoader->register($loadedBundle->getNamespace());
 
                 if ($loadedBundle->hasSmarty()) {
                     $this->smarty->addTemplateDir($path . $bundle . '/templates/');

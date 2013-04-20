@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
-    <title></title>
+    <title>Hello world!</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     
     <link href="{{$rootDir}}/css/screen.css" rel="stylesheet" type="text/css" media="all" />
@@ -11,9 +11,6 @@
 </head>
 
 <body>
-    <div id="userpanel">
-    {{$userpanel}}
-    </div>
     <div id="container">
         {{$content}}
     </div>

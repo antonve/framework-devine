@@ -1,6 +1,6 @@
 <?php
 
-// AirportController.php - General controller
+// TestController.php - Example test controller
 // By Anton Van Eechaute
 
 namespace Example\ExampleBundle\Controller;

@@ -1,0 +1,8 @@
+{
+    "name": "framework-devine",
+    "description": "Basic frameword for devine assignments",
+    "minimum-stability": "alpha",
+    "require": {
+        "twig/twig": "1.*"
+    }
+}

@@ -15,6 +15,6 @@ class TestController extends BaseController
 
         $this->add('param', $service->test());
 
-        $this->setTemplate('example.index');
+        $this->setTemplate('example.index.twig');
     }
 }

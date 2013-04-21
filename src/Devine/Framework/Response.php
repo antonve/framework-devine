@@ -23,9 +23,9 @@ class Response
     private $statusCode;
     
     /**
-     * @var Smarty
+     * @var TwigLoader
      */
-    private $smarty;
+    private $twigLoader;
     
     /**
      * @var string 
@@ -123,10 +123,10 @@ class Response
      * @param Smarty $smarty       
      * @param Request $request  
      */
-    public function __construct($smarty = null)
+    public function __construct($twigLoader = null)
     {
         $this->statusCode = 200;
-        $this->smarty = $smarty;
+        $this->twigLoader = $twigLoader;
         $this->data = array();
         $this->slots = array();
     }
@@ -145,25 +145,17 @@ class Response
             header('Content-type:  application/json');
             echo json_encode($this->content);
             
-        } elseif(null === $this->smarty) {
+        } elseif(null === $this->twigLoader) {
             
             echo $this->content;
             
         } else {
             // assign all variables passed on from the controller
             foreach ($this->data as $key => $val) {
-                $this->smarty->assign($key, $val);
+                $this->twigLoader->assign($key, $val);
             }
-            if ($no_layout) {
-                $this->smarty->display($this->slots['content'] . '.tpl');
-            } else {
-                foreach ($this->slots as $key => $slot) {
-                    if (isset($slot)) {
-                        $this->smarty->assign($key, $this->smarty->fetch($slot . '.tpl'));   
-                    }
-                }
-                $this->smarty->display($this->layout);
-            }
+
+            $this->twigLoader->initialize()->render($this->slots['content']);
         }    
     }
     
@@ -208,14 +200,6 @@ class Response
     }    
     
     /**
-     * @param string $layout  
-     */
-    public function setLayout($layout)
-    {
-        $this->layout = $layout;
-    }
-    
-    /**
      * @param array $data  
      */
     public function setData($data)
@@ -236,7 +220,7 @@ class Response
      */
     public function setRootDir($rootDir)
     {
-        $this->data['rootDir'] = $rootDir;
+        $this->data['path'] = $rootDir;
     }
     
     /**

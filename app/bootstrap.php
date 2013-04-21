@@ -10,6 +10,7 @@ use Devine\Framework\ControllerResolver;
 use Devine\Framework\PageNotFoundException;
 use Devine\Framework\SingletonPDO;
 use Devine\Framework\BundleLoader;
+use Devine\Framework\TwigLoader;
 
 // load helpers
 require_once ($project_dir . 'src/Devine/Framework/helpers.php');
@@ -24,13 +25,13 @@ session_start();
 $config = include('config/config.php');
 
 // configure smarty templating engine
-include('config/smarty.php');
+$twigLoader = new TwigLoader($config['dev'], $project_dir . 'app/templates', $project_dir . 'app/cache');
 
 // try to build the page
 try {
 
     // load modules
-    $bundleLoader = new BundleLoader(include('config/bundles.php'), $smarty);
+    $bundleLoader = new BundleLoader(include('config/bundles.php'), $twigLoader);
     $bundleLoader->load($project_dir . 'src/');
 
     // build Request object
@@ -43,11 +44,10 @@ try {
     SingletonPDO::setConfig(include('config/database.php'));
 
     // execute the controller and receive the response
-    $controllerResolver = new ControllerResolver($route, $request, $smarty);
+    $controllerResolver = new ControllerResolver($route, $request, $twigLoader);
     $response = $controllerResolver->resolve($bundleLoader->getServices());
     
     // configure templating
-    $response->setLayout($project_dir . 'app/templates/layout.tpl');
     $response->setRoot($request->getRoot());
     $response->setRootDir(dirname($request->getRoot()));
     $response->setDevelopmentMode($config['dev']);

@@ -8,7 +8,7 @@ return array(
     'name'      => 'UserBundle',
     'routes'    => true,
     'init'      => true,
-    'smarty'    => true,
+    'templating'    => true,
     'services'  => array(
          /*array (
         'name' => 'ExampleService',

@@ -6,13 +6,13 @@
     <title>Hello world!</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     
-    <link href="{{$rootDir}}/css/screen.css" rel="stylesheet" type="text/css" media="all" />
-    <script type="text/javascript" src="{{$rootDir}}/js/app.js"></script>
+    <link href="{{ path }}/css/screen.css" rel="stylesheet" type="text/css" media="all" />
+    <script type="text/javascript" src="{{ path }}/js/app.js"></script>
 </head>
 
 <body>
     <div id="container">
-        {{$content}}
+        {% block content %}{% endblock %}
     </div>
 </body>
 

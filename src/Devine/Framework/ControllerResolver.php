@@ -32,11 +32,11 @@ class ControllerResolver
      * @param Route $route
      * @param Request $request
      */
-    public function __construct(Route $route, Request &$request, \Smarty $smarty)
+    public function __construct(Route $route, Request &$request, TwigLoader $twigLoader)
     {
         $this->route = $route;
         $this->request = $request;
-        $this->response = new Response($smarty);
+        $this->response = new Response($twigLoader);
     }
 
     /**

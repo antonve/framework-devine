@@ -99,9 +99,9 @@ class Bundle
     /**
      * @return bool
      */
-    public function hasSmarty()
+    public function hasTemplating()
     {
-        return $this->config['smarty'];
+        return $this->config['templating'];
     }
 
     /**

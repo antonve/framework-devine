@@ -8,7 +8,7 @@ return array(
     'name'      => 'ExampleBundle',
     'routes'    => true,
     'init'      => false,
-    'smarty'    => true,
+    'templating'    => true,
     'services'  => array(
          array (
         'name' => 'ExampleService',

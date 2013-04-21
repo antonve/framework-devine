@@ -35,9 +35,9 @@ class BundleLoader
     private $services;
 
     /**
-     * @var \Smarty
+     * @var TwigLoader
      */
-    private $smarty;
+    private $twigLoader;
 
     /**
      * @var array
@@ -48,12 +48,12 @@ class BundleLoader
      * @param array $bundles
      * @param BundleClassLoader $bundleClassLoader
      */
-    function __construct($bundles, \Smarty $smarty)
+    function __construct($bundles, TwigLoader $twigLoader)
     {
         $this->bundles = $bundles;
         $this->routes = new RouteCollection();
         $this->services = new Collection();
-        $this->smarty = $smarty;
+        $this->twigLoader = $twigLoader;
     }
 
     /**
@@ -73,8 +73,8 @@ class BundleLoader
                 );
                 $loadedBundle->load();
 
-                if ($loadedBundle->hasSmarty()) {
-                    $this->smarty->addTemplateDir($path . $bundle . '/templates/');
+                if ($loadedBundle->hasTemplating()) {
+                    $this->twigLoader->addTemplateDir($path . $bundle . '/templates/');
                 }
 
                 $this->loaded[] = $loadedBundle;

@@ -23,9 +23,9 @@ class Response
     private $statusCode;
     
     /**
-     * @var TwigLoader
+     * @var TemplateLoader
      */
-    private $twigLoader;
+    private $templateLoader;
     
     /**
      * @var string 
@@ -120,13 +120,13 @@ class Response
     
     /**
      * Initializes a new Response with statusCode 200 and html mode
-     * @param Smarty $smarty       
+     * @param TemplateLoader $templateLoader       
      * @param Request $request  
      */
-    public function __construct($twigLoader = null)
+    public function __construct($templateLoader = null)
     {
         $this->statusCode = 200;
-        $this->twigLoader = $twigLoader;
+        $this->templateLoader = $templateLoader;
         $this->data = array();
         $this->slots = array();
     }
@@ -145,17 +145,17 @@ class Response
             header('Content-type:  application/json');
             echo json_encode($this->content);
             
-        } elseif(null === $this->twigLoader) {
+        } elseif(null === $this->templateLoader) {
             
             echo $this->content;
             
         } else {
             // assign all variables passed on from the controller
             foreach ($this->data as $key => $val) {
-                $this->twigLoader->assign($key, $val);
+                $this->templateLoader->assign($key, $val);
             }
 
-            $this->twigLoader->initialize()->render($this->slots['content']);
+            $this->templateLoader->initialize()->render($this->slots['content']);
         }    
     }
     

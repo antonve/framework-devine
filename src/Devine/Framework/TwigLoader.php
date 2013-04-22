@@ -2,7 +2,7 @@
 
 namespace Devine\Framework;
 
-class TwigLoader
+class TwigLoader implements TemplateLoader
 {
 	private $loaders = array();
 	private $twig;
@@ -36,7 +36,7 @@ class TwigLoader
 		$this->vars[$key] = $val;
 	}
 
-	public function getTwig()
+	public function get()
 	{
 		return $this->twig;
 	}

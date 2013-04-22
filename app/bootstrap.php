@@ -24,14 +24,15 @@ session_start();
 // load general config file
 $config = include('config/config.php');
 
-// configure smarty templating engine
-$twigLoader = new TwigLoader($config['dev'], $project_dir . 'app/templates', $project_dir . 'app/cache');
+// configure templating engine
+$templateLoader = new TwigLoader($config['dev'], $project_dir . 'app/templates', $project_dir . 'app/cache');
+$templateLoader->addTemplateDir($project_dir . 'src/Devine/Framework/templates/');
 
 // try to build the page
 try {
 
     // load modules
-    $bundleLoader = new BundleLoader(include('config/bundles.php'), $twigLoader);
+    $bundleLoader = new BundleLoader(include('config/bundles.php'), $templateLoader);
     $bundleLoader->load($project_dir . 'src/');
 
     // build Request object
@@ -44,7 +45,7 @@ try {
     SingletonPDO::setConfig(include('config/database.php'));
 
     // execute the controller and receive the response
-    $controllerResolver = new ControllerResolver($route, $request, $twigLoader);
+    $controllerResolver = new ControllerResolver($route, $request, $templateLoader);
     $response = $controllerResolver->resolve($bundleLoader->getServices());
     
     // configure templating
@@ -63,15 +64,14 @@ catch (PageNotFoundException $e) {
     $request = new Request();
     
     // build new Response object
-    $response = new Response($smarty, $request);
+    $response = new Response($templateLoader, $request);
     $response->setStatusCode(404);
     
     // configure database
     SingletonPDO::setConfig(include('config/database.php'));
     
     // configure templating
-    $response->setLayout($project_dir . 'app/templates/layout.tpl');
-    $response->setTemplate('error404');
+    $response->setTemplate('error404.twig');
     $response->setRoot($request->getRoot());
     $response->setRootDir(dirname($request->getRoot()));
     $response->setDevelopmentMode($config['dev']);
@@ -89,13 +89,12 @@ catch (Exception $e) {
     SingletonPDO::setConfig(include('config/database.php'));
     
     // build new Response object
-    $response = new Response($smarty, $request);
+    $response = new Response($templateLoader, $request);
     $response->setData(array('error' => $e->getMessage(), 'trace' => $trace));
     $response->setStatusCode(500);
     
     // configure templating
-    $response->setLayout($project_dir . 'app/templates/layout.tpl');
-    $response->setTemplate('error500');
+    $response->setTemplate('error500.twig');
     $response->setRoot($request->getRoot());
     $response->setRootDir(dirname($request->getRoot()));
     $response->setDevelopmentMode($config['dev']);

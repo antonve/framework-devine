@@ -1,3 +1,6 @@
+{% extends "base.twig" %}
+
+{% block content %}
 <div id="error500">
     <h1>Interne server fout.</h1>
     {% if dev %}
@@ -12,3 +15,4 @@
     <p>De pagina die u probeert te bereiken kon niet worden geladen.</p>
     {% endif %}
 </div>
+{% endblock %}
